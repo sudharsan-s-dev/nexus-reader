@@ -149,7 +149,18 @@ async function loadNotes(docHash) {
         const res = await fetch(`${apiBase}/api/notes/load?document_id=${encodeURIComponent(docHash)}`, { credentials: 'include' });
         if (res.ok) {
             const data = await res.json();
-            editor.innerHTML = data.content || '';
+            const defaultNote = `
+                <div style="color: var(--text-secondary); padding: 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; margin-bottom: 16px; font-family: var(--font-body);">
+                    <h3 style="margin-top: 0; color: var(--text-primary); font-size: 15px; margin-bottom: 12px;"><i class="fa-solid fa-lightbulb" style="color: #eab308; margin-right: 8px;"></i>How to use Notes Effectively</h3>
+                    <ul style="padding-left: 20px; line-height: 1.6; font-size: 13px; margin-bottom: 16px;">
+                        <li><strong>Format text</strong> using the toolbar buttons above (Bold, Italic, Lists).</li>
+                        <li><strong>Deep Links:</strong> Scroll to an important part of your PDF, then click <b><i class="fa-solid fa-link"></i> Add Anchor</b>. It inserts a clickable badge that brings you exactly back to that spot!</li>
+                        <li><strong>Auto-save:</strong> Your notes are automatically and securely saved.</li>
+                    </ul>
+                    <p style="font-size: 12px; font-style: italic; opacity: 0.7; margin-bottom: 0;">(Select and delete this box to start writing your own notes)</p>
+                </div><p><br></p>
+            `;
+            editor.innerHTML = data.content || defaultNote;
             attachAnchorListeners();
         }
     } catch(err) {
