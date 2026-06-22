@@ -1,0 +1,87 @@
+=========================================================
+          NEXUS READER - PROJECT DETAILS
+=========================================================
+
+1. PROJECT OVERVIEW
+---------------------------------------------------------
+Nexus Reader is an "AI Smart Document Reader" designed to 
+enhance the reading experience by providing intelligent, 
+context-aware tools directly on top of documents. 
+It features a split-screen workspace where users can view 
+documents on the left and interact with AI tools, translations, 
+and personal notes on the right.
+
+2. ARCHITECTURE & TECH STACK
+---------------------------------------------------------
+The project uses a lightweight client-server architecture:
+- Frontend: Vanilla HTML, CSS, and JavaScript. No heavy 
+  frameworks like React or Angular, making it fast and simple.
+- Backend: Python with Flask to serve API endpoints.
+- Database: SQLite (nexus_reader.db) for local data storage.
+
+3. FRONTEND DETAILS (d:\Projects\Nexus-Reader-main\frontend)
+---------------------------------------------------------
+- index.html: The main entry point containing the UI layout, 
+  split-screen workspace, top navigation, and selection popup.
+- styles.css: Contains all the CSS variables, layout styling, 
+  and a beautiful Dark/Light theme system.
+- app.js: Handles global UI logic (theme toggling, tab 
+  switching, and the draggable split-screen resizer).
+- components/document-viewer.js: Integrates Mozilla's PDF.js 
+  to parse and render PDF files on HTML5 Canvas with text layers.
+- components/selection-popup.js: The core interactivity engine. 
+  It detects when a user highlights text and displays a floating 
+  toolbar with smart actions.
+- components/notes-editor.js: Manages the rich-text notes panel.
+
+4. BACKEND DETAILS (d:\Projects\Nexus-Reader-main\backend)
+---------------------------------------------------------
+- app.py: The Flask server running on port 5000. It handles 
+  Cross-Origin Resource Sharing (CORS) so the frontend can 
+  communicate with it securely.
+- requirements.txt: Python dependencies (Flask, requests, 
+  deep-translator, etc.).
+- nexus_reader.db: SQLite database initialized to store user 
+  notes and documents.
+
+Backend API Endpoints:
+- GET /api/meaning: Fetches dictionary definitions using the 
+  Free Dictionary API.
+- POST /api/translate: Translates text into various languages 
+  using the deep-translator library.
+- POST /api/explain: Currently returns a mocked AI explanation 
+  of selected text (ready to be hooked up to OpenAI/Gemini).
+- GET /api/wikipedia: Fetches Wikipedia page summaries based 
+  on highlighted keywords.
+
+5. CORE FEATURES
+---------------------------------------------------------
+- Smart Selection Popup: Highlighting text in the PDF triggers 
+  a popup with options: Meaning, Translate, Explain, Wikipedia, 
+  and Listen.
+- Text-to-Speech (Listen): Uses the browser's native Web 
+  Speech API to read highlighted text aloud. It supports 
+  changing voices seamlessly mid-sentence and highlights words 
+  as they are spoken.
+- Knowledge Panel: Displays the results of the smart actions 
+  (translations, definitions, wiki summaries).
+- Split-Screen Workspace: Users can adjust the width of the 
+  document versus their notes using a draggable resizer.
+- Rich-Text Notes: Users can take notes with basic formatting 
+  and anchor links.
+- Dark Mode: A beautifully designed dark mode utilizing CSS 
+  variables for seamless toggling.
+
+6. HOW TO RUN THE PROJECT
+---------------------------------------------------------
+1. Backend: 
+   - Open a terminal in the `backend` folder.
+   - Activate the virtual environment: `.\.venv\Scripts\activate`
+   - Run the server: `python app.py` (Runs on http://127.0.0.1:5000)
+
+2. Frontend:
+   - Open a terminal in the `frontend` folder.
+   - Run a local server: `python -m http.server 8000`
+   - Open browser to http://localhost:8000
+
+=========================================================

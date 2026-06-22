@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Nexus Reader — AI Smart Document Reader with split-screen workspace. Get definitions, translations, AI explanations, and Wikipedia summaries by highlighting text.">
+    <title>Nexus Reader - AI Smart Document Reader</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Core UI styles -->
+    <link rel="stylesheet" href="styles.css?v=4">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf_viewer.min.css">
+    <link rel="stylesheet" href="pdfjs-custom.css">
+    <!-- Component Scripts -->
+</head>
+<body class="dark-theme reader-v2">
+    
+    <!-- Animated Ambient Background -->
+    <div class="ambient-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="glass-app-container reader-app-container">
+        <!-- Top Navigation Bar -->
+        <nav class="topbar glass-topbar">
+            <a href="index.html" class="logo" style="text-decoration: none;">
+                <div class="logo-icon"><i class="fa-solid fa-layer-group"></i></div>
+                <span class="logo-text">Nexus<span class="highlight">Reader</span></span>
+            </a>
+            <div class="toolbar">
+                <button class="tool-btn action-btn tooltip" data-tooltip="OCR Scan" id="ocr-scan-btn">
+                    <i class="fa-solid fa-expand"></i>
+                </button>
+                <button class="tool-btn action-btn tooltip" data-tooltip="Upload Document" id="upload-btn" onclick="document.getElementById('file-upload').click()">
+                    <i class="fa-solid fa-file-arrow-up"></i>
+                    <input type="file" id="file-upload" accept=".pdf,.txt,.docx,.png,.jpg,.jpeg" hidden>
+                </button>
+                <button class="tool-btn tooltip" data-tooltip="Settings & API Key" id="settings-btn">
+                    <i class="fa-solid fa-gear"></i>
+                </button>
+                <div class="avatar-circle">
+                    <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff" alt="User">
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Split Workspace -->
+        <main class="workspace glass-workspace">
+            <!-- Left Panel: Document Viewer -->
+            <section class="panel doc-panel" id="doc-panel">
+                <div class="panel-header">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <h2><i class="fa-regular fa-file-pdf"></i> Document</h2>
+                        <span id="ocr-status-badge" style="font-size: 11px; padding: 4px 8px; border-radius: 4px; font-weight: 500; display: none;"></span>
+                    </div>
+                    <div class="zoom-controls">
+                        <button class="icon-btn tooltip" data-tooltip="Zoom Out" id="zoom-out"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
+                        <span class="zoom-level">100%</span>
+                        <button class="icon-btn tooltip" data-tooltip="Zoom In" id="zoom-in"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                    </div>
+                </div>
+                <div class="panel-content doc-container" id="doc-container">
+                    <div class="empty-state">
+                        <div class="empty-icon"><i class="fa-solid fa-file-pdf"></i></div>
+                        <h3>No Document Loaded</h3>
+                        <p>Upload a PDF, DOCX, or TXT file to begin reading.</p>
+                        <button class="primary-btn" onclick="document.getElementById('file-upload').click()">Browse Files</button>
+                    </div>
+                    <!-- Document pages will be rendered here -->
+                </div>
+            </section>
+
+            <!-- Resizer Handle -->
+            <div class="resizer" id="resizer">
+                <div class="resizer-handle"></div>
+            </div>
+
+            <!-- Right Panel: Notes & Knowledge (Sidebar/Bottom Sheet) -->
+            <section class="panel notes-panel reader-sidebar" id="notes-panel">
+                <div class="sheet-handle-container">
+                    <div class="sheet-handle"></div>
+                </div>
+                <div class="panel-header">
+                    <div class="tabs">
+                        <button class="tab active" data-target="notes-tab"><i class="fa-regular fa-note-sticky"></i> Notes</button>
+                        <button class="tab" data-target="knowledge-tab"><i class="fa-solid fa-brain"></i> Knowledge</button>
+                        <button class="tab" data-target="ocr-tab"><i class="fa-solid fa-expand"></i> OCR Results</button>
+                        <button class="tab" data-target="study-tab"><i class="fa-solid fa-graduation-cap"></i> Study Guide</button>
+                        <button class="tab" data-target="podcast-tab"><i class="fa-solid fa-podcast"></i> Podcast</button>
+                    </div>
+                </div>
+                
+                <div class="panel-content tab-content-container">
+                    <!-- Notes Tab -->
+                    <div class="tab-content active" id="notes-tab">
+                        <div class="notes-toolbar">
+                            <button class="icon-btn tooltip" data-tooltip="Bold"><i class="fa-solid fa-bold"></i></button>
+                            <button class="icon-btn tooltip" data-tooltip="Italic"><i class="fa-solid fa-italic"></i></button>
+                            <button class="icon-btn tooltip" data-tooltip="List"><i class="fa-solid fa-list"></i></button>
+                            <button class="icon-btn tooltip link-anchor-btn" data-tooltip="Insert Location Anchor"><i class="fa-solid fa-link"></i> Add Anchor</button>
+                        </div>
+                        <div class="editor" contenteditable="true" id="notes-editor" placeholder="Start typing your notes here..."></div>
+                    </div>
+
+                    <!-- Knowledge Tab -->
+                    <div class="tab-content" id="knowledge-tab">
+                        <div class="knowledge-cards" id="knowledge-container">
+                            <div class="empty-state sm">
+                                <i class="fa-solid fa-lightbulb"></i>
+                                <p>Select text in the document and click "Explain" or "Search" to see knowledge cards here.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- OCR Results Tab -->
+                    <div class="tab-content" id="ocr-tab">
+                        <div class="ocr-toolbar" style="padding: 12px 16px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                            <span id="ocr-progress-text" style="font-size: 13px; color: var(--text-secondary);">No OCR data</span>
+                            <div class="ocr-actions">
+                                <button id="ocr-copy-btn" class="icon-btn tooltip" data-tooltip="Copy All OCR Text"><i class="fa-regular fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div id="ocr-results-container" style="flex: 1; overflow-y: auto; padding: 24px; font-size: 14px; line-height: 1.6; user-select: text;">
+                            <div class="empty-state sm">
+                                <i class="fa-solid fa-expand" style="font-size: 32px; color: var(--border-color); margin-bottom: 12px;"></i>
+                                <p>Click "OCR Scan" to extract text from scanned PDFs or images.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Study Guide Tab -->
+                    <div class="tab-content" id="study-tab">
+                        <div class="study-toolbar" style="padding: 16px; border-bottom: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 12px; background: var(--bg-panel);">
+                            
+                            <div style="display: flex; gap: 12px;">
+                                <div style="flex: 1.5;">
+                                    <label style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); margin-bottom: 4px; display: block;">Scope</label>
+                                    <select id="study-scope" class="study-select">
+                                        <option value="Selection">Highlighted Selection</option>
+                                        <option value="Page">Current Page</option>
+                                        <option value="Document">Entire Document</option>
+                                    </select>
+                                </div>
+                                <div style="flex: 1;">
+                                    <label style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); margin-bottom: 4px; display: block;">Difficulty</label>
+                                    <select id="study-difficulty" class="study-select">
+                                        <option value="Easy">Easy</option>
+                                        <option value="Medium" selected>Medium</option>
+                                        <option value="Hard">Hard</option>
+                                    </select>
+                                </div>
+                                <div style="flex: 1;">
+                                    <label style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); margin-bottom: 4px; display: block;">Count</label>
+                                    <select id="study-count" class="study-select">
+                                        <option value="5" selected>5 Qs</option>
+                                        <option value="10">10 Qs</option>
+                                        <option value="15">15 Qs</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <button class="study-action-btn" data-type="Summary"><i class="fa-solid fa-align-left"></i> Summary</button>
+                                <button class="study-action-btn" data-type="MCQ"><i class="fa-solid fa-list-ul"></i> MCQs</button>
+                                <button class="study-action-btn" data-type="Viva"><i class="fa-solid fa-comments"></i> Viva</button>
+                                <button class="study-action-btn" data-type="Interview"><i class="fa-solid fa-briefcase"></i> Interview</button>
+                                <button class="study-action-btn" data-type="2-Mark"><i class="fa-solid fa-2"></i> 2-Mark</button>
+                                <button class="study-action-btn" data-type="Flashcard"><i class="fa-solid fa-clone"></i> Flashcards</button>
+                            </div>
+                        </div>
+
+                        <div id="study-results-container" style="flex: 1; overflow-y: auto; padding: 24px; font-size: 14px; line-height: 1.6;">
+                            <div class="empty-state sm">
+                                <i class="fa-solid fa-graduation-cap" style="font-size: 32px; color: var(--border-color); margin-bottom: 12px;"></i>
+                                <p>Generate study materials directly from your document.</p>
+                                <p style="font-size: 12px; margin-top: 8px;">Ensure you have added your Gemini API Key in Settings.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Podcast Tab -->
+                    <div class="tab-content" id="podcast-tab">
+                        <div class="study-toolbar" style="padding: 16px; border-bottom: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 12px; background: var(--bg-panel);">
+                            <div style="display: flex; gap: 12px; align-items: center;">
+                                <div style="flex: 1; max-width: 150px;">
+                                    <label style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); margin-bottom: 4px; display: block;">Language</label>
+                                    <select id="podcast-language" class="study-select">
+                                        <option value="English" selected>English</option>
+                                        <option value="Tamil">Tamil</option>
+                                        <option value="Hindi">Hindi</option>
+                                        <option value="Spanish">Spanish</option>
+                                        <option value="French">French</option>
+                                        <option value="German">German</option>
+                                        <option value="Telugu">Telugu</option>
+                                        <option value="Malayalam">Malayalam</option>
+                                        <option value="Kannada">Kannada</option>
+                                        <option value="Bengali">Bengali</option>
+                                    </select>
+                                </div>
+                                <div style="flex: 1; max-width: 150px;">
+                                    <label style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); margin-bottom: 4px; display: block;">Speed</label>
+                                    <select id="podcast-speed" class="study-select">
+                                        <option value="0.75">0.75x</option>
+                                        <option value="1.0" selected>1.0x (Normal)</option>
+                                        <option value="1.25">1.25x</option>
+                                        <option value="1.5">1.5x</option>
+                                        <option value="1.75">1.75x</option>
+                                        <option value="2.0">2.0x</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="primary-btn glow-btn" id="generate-podcast-btn" style="justify-content: center; background: linear-gradient(135deg, #818cf8, #6366f1); border: none;"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate Podcast</button>
+                        </div>
+                        <div id="podcast-results-container" style="flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 350px; width: 100%;">
+                            <div class="empty-state sm">
+                                <i class="fa-solid fa-podcast" style="font-size: 32px; color: var(--border-color); margin-bottom: 12px;"></i>
+                                <p>Generate an interactive audio podcast of your document.</p>
+                                <p style="font-size: 12px; margin-top: 8px;">Click "Generate Podcast" to begin.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Mobile Sheet Toggle Bar (FABs) -->
+        <div class="mobile-reader-tools">
+            <button class="mobile-tool-btn" data-target="notes-tab" aria-label="Notes"><i class="fa-regular fa-note-sticky"></i></button>
+            <button class="mobile-tool-btn" data-target="study-tab" aria-label="Study Guide"><i class="fa-solid fa-graduation-cap"></i></button>
+            <button class="mobile-tool-btn" data-target="podcast-tab" aria-label="Podcast"><i class="fa-solid fa-podcast"></i></button>
+        </div>
+
+        <!-- Mobile Sheet Overlay -->
+        <div class="sheet-overlay" id="sheet-overlay"></div>
+    </div>
+
+    <!-- Selection Popup (Tooltip) -->
+    <div class="selection-popup hidden" id="selection-popup">
+        <button class="popup-btn" id="btn-meaning"><i class="fa-solid fa-book"></i> Meaning</button>
+        <button class="popup-btn" id="btn-translate"><i class="fa-solid fa-language"></i> Translate</button>
+        <button class="popup-btn highlight-btn" id="btn-explain"><i class="fa-solid fa-wand-magic-sparkles"></i> Explain Simply</button>
+        <button class="popup-btn wiki-btn" id="btn-wikipedia"><i class="fa-brands fa-wikipedia-w"></i> Wikipedia</button>
+        <button class="popup-btn listen-btn" id="btn-listen"><i class="fa-solid fa-volume-high"></i> Listen</button>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-gear"></i> Settings</h2>
+                <button class="icon-btn" id="close-settings"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="gemini-api-key">Google Gemini API Key</label>
+                    <input type="password" id="gemini-api-key" placeholder="AIzaSy...">
+                    <p class="help-text">Your key is stored securely in your browser's local storage and is only used to generate Study Guides.</p>
+                </div>
+                
+                <!-- API Key Instructions -->
+                <div style="margin-top: 16px; padding: 12px; background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 8px;">
+                    <h4 style="font-size: 12px; color: var(--accent-primary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">How to get your free API key:</h4>
+                    <ol style="font-size: 13px; color: var(--text-secondary); margin-left: 20px; line-height: 1.5;">
+                        <li style="margin-bottom: 4px;">Go to <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: var(--accent-primary); text-decoration: none; font-weight: 500;">Google AI Studio <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 10px;"></i></a></li>
+                        <li style="margin-bottom: 4px;">Sign in with your Google account.</li>
+                        <li style="margin-bottom: 4px;">Click the <strong>"Create API key"</strong> button.</li>
+                        <li>Copy the generated key and paste it here.</li>
+                    </ol>
+                </div>
+
+                <button id="save-settings-btn" class="primary-btn" style="width: 100%; margin-top: 16px;">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDF.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        // Set worker path
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    </script>
+    
+    <!-- Mammoth.js for DOCX parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+    
+
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="storage.js"></script>
+    <script src="config.js?v=1"></script>
+    <script src="nexus-ui.js"></script>
+    <script src="app.js?v=2"></script>
+    <script src="components/document-viewer.js?v=3"></script>
+    <script src="components/notes-editor.js?v=4"></script>
+    <script src="components/ocr-handler.js?v=3"></script>
+    <script src="components/selection-popup.js?v=3"></script>
+    <script src="components/study-guide.js?v=5"></script>
+    <script src="components/flashcard-guide.js?v=2"></script>
+    <script src="components/podcast-guide.js?v=2"></script>
+
+    <!-- Mobile Bottom Sheet Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sheet = document.querySelector('.reader-sidebar');
+            const overlay = document.getElementById('sheet-overlay');
+            const handle = document.querySelector('.sheet-handle-container');
+            const mobileBtns = document.querySelectorAll('.mobile-tool-btn');
+            const desktopTabs = document.querySelectorAll('.panel-header .tab');
+
+            function openSheet(targetId) {
+                // Determine if mobile view (based on overlay/fab visibility via css)
+                if (window.innerWidth <= 768) {
+                    sheet.classList.add('sheet-open');
+                    overlay.classList.add('show');
+                    
+                    // Activate corresponding desktop tab so content switches
+                    const tabBtn = document.querySelector(`.panel-header .tab[data-target="${targetId}"]`);
+                    if (tabBtn) tabBtn.click();
+
+                    // Update FAB active state
+                    mobileBtns.forEach(btn => btn.classList.remove('active'));
+                    const activeFab = document.querySelector(`.mobile-tool-btn[data-target="${targetId}"]`);
+                    if (activeFab) activeFab.classList.add('active');
+                }
+            }
+
+            function closeSheet() {
+                sheet.classList.remove('sheet-open');
+                overlay.classList.remove('show');
+                mobileBtns.forEach(btn => btn.classList.remove('active'));
+            }
+
+            mobileBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const target = btn.getAttribute('data-target');
+                    openSheet(target);
+                });
+            });
+
+            if (overlay) overlay.addEventListener('click', closeSheet);
+            if (handle) handle.addEventListener('click', closeSheet);
+            
+            // Swipe down to close (basic touch handling)
+            let touchStartY = 0;
+            if (handle) {
+                handle.addEventListener('touchstart', e => touchStartY = e.touches[0].clientY);
+                handle.addEventListener('touchend', e => {
+                    if (e.changedTouches[0].clientY > touchStartY + 30) {
+                        closeSheet();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

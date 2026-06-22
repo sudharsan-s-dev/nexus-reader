@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Nexus Reader — The next-gen AI-powered document workspace. Highlight text to get instant meanings, translations, explanations, and Wikipedia lookups inside your PDFs.">
+    <title>Nexus Reader | Next-Gen AI Document Workspace</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Core UI styles -->
+    <link rel="stylesheet" href="styles.css?v=4">
+</head>
+<body class="dark-theme landing-page">
+
+    <!-- Animated Ambient Background -->
+    <div class="ambient-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Landing Navigation -->
+    <header class="landing-nav glass-topbar">
+        <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">
+            <div class="logo-icon"><i class="fa-solid fa-layer-group"></i></div>
+            <span class="logo-text">Nexus<span class="highlight">Reader</span></span>
+        </a>
+        <div class="nav-actions" style="display: flex; gap: 16px; align-items: center;">
+            <a href="index.html" class="glass-btn" style="padding: 10px 20px; font-size: 14px; font-weight: 600; text-decoration: none; color: inherit; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-right-to-bracket"></i> Sign In</a>
+            <a href="index.html" class="primary-btn glow-btn" style="padding: 10px 20px; font-size: 14px; font-weight: 600;">Launch Workspace <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="landing-hero">
+        <div class="hero-content">
+            <span class="badge"><i class="fa-solid fa-sparkles"></i> Powered by Gemini AI</span>
+            <h1>Read Smarter.<br>Learn <span class="highlight-gradient">10x Faster.</span></h1>
+            <p>Nexus Reader is an ultra-premium, dual-pane AI document workspace. Scan PDFs, generate study guides, take anchored notes, and explain complex topics instantly.</p>
+            <div class="hero-actions">
+                <a href="index.html" class="primary-btn glow-btn large-btn">Start Reading for Free</a>
+                <a href="#features" class="glass-btn large-btn"><i class="fa-solid fa-circle-play"></i> Explore Features</a>
+            </div>
+        </div>
+        <div class="hero-preview-wrapper">
+            <!-- Glass Mockup of Split-Screen Workspace -->
+            <div class="workspace-mockup landing-card">
+                <div class="mockup-header">
+                    <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+                    <div class="mockup-tab">document_analysis.pdf</div>
+                </div>
+                <div class="mockup-body">
+                    <div class="mockup-left">
+                        <div class="mockup-line title"></div>
+                        <div class="mockup-line select-highlight">Quantum Computing leverages qubits...</div>
+                        <div class="mockup-line"></div>
+                        <div class="mockup-line"></div>
+                    </div>
+                    <div class="mockup-divider"></div>
+                    <div class="mockup-right">
+                        <div class="explain-card landing-card">
+                            <div class="explain-header">
+                                <i class="fa-solid fa-wand-magic-sparkles text-gradient"></i>
+                                <strong>AI Explanation</strong>
+                            </div>
+                            <p>Qubits exist in superpositions, allowing computation of complex calculations at exponentially faster speeds.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="landing-features">
+        <div class="section-header">
+            <span class="badge">Supercharged Features</span>
+            <h2>Everything you need to master documents</h2>
+            <p>A unified split-pane workspace designed for students, researchers, and creators.</p>
+        </div>
+
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-card landing-card">
+                <div class="icon-wrapper document-icon">
+                    <i class="fa-regular fa-file-pdf"></i>
+                </div>
+                <h3>Smart Document Viewer</h3>
+                <p>Support for PDFs, Word files, and rich text. Renders layout structures perfectly with fluid multi-touch zoom and scroll controls.</p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-card landing-card">
+                <div class="icon-wrapper video-icon">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <h3>Contextual Explain Simply</h3>
+                <p>Highlight any word or block of text to instantly get definitions, translation, Wikipedia articles, or deep AI explanations.</p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-card landing-card">
+                <div class="icon-wrapper audio-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h3>Gemini Study Guide</h3>
+                <p>Automatically generate summaries, Multiple Choice Questions (MCQs), custom Viva preparation questions, and interview guides from text.</p>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="feature-card landing-card">
+                <div class="icon-wrapper" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">
+                    <i class="fa-solid fa-expand"></i>
+                </div>
+                <h3>High-Precision OCR</h3>
+                <p>Scan image files or photocopy PDFs using local optical character recognition to extract clean, editable text layers instantly.</p>
+            </div>
+
+            <!-- Feature 5 -->
+            <div class="feature-card landing-card">
+                <div class="icon-wrapper" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">
+                    <i class="fa-solid fa-link"></i>
+                </div>
+                <h3>Deep Location Anchors</h3>
+                <p>Insert scroll location anchors inside your notes. Click the anchor to scroll the document pane directly back to that exact line.</p>
+            </div>
+
+            <!-- Feature 6 -->
+            <div class="feature-card landing-card">
+                <div class="icon-wrapper" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;">
+                    <i class="fa-solid fa-fire"></i>
+                </div>
+                <h3>Daily Streaks & Leaderboard</h3>
+                <p>Track your daily learning progress. Boost your streak by reading documents and climb the global scoreboard rankings.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="landing-cta">
+        <div class="cta-card landing-card">
+            <h2>Ready to transform your reading experience?</h2>
+            <p>Join thousands of learners analyzing documents and taking smart notes with Nexus Reader.</p>
+            <a href="index.html" class="primary-btn glow-btn large-btn">Launch App Dashboard</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="landing-footer">
+        <p>© 2026 Nexus Reader. Rebuilt with passion.</p>
+    </footer>
+
+</body>
+</html>

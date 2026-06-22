@@ -1,0 +1,26 @@
+/* DocumentViewer Styles */
+.pdf-page {
+    background: white;
+    margin: 0 auto 24px auto;
+    position: relative;
+}
+
+body.dark-theme .pdf-page {
+    /* Keep document white, or invert it? Usually PDFs should remain white or slight brightness filter */
+    filter: brightness(0.85);
+}
+
+.doc-container {
+    padding: 24px;
+    background-color: #ef444400; /* transparent */
+}
+
+/* We removed custom .textLayer styles here to rely entirely on official pdf_viewer.min.css */
+
+.textLayer .highlight {
+    margin: -1px;
+    padding: 1px;
+    background-color: var(--accent-primary);
+    opacity: 0.3;
+    border-radius: 4px;
+}
