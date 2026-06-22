@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Nexus Reader — Your AI-powered smart document workspace. Upload PDFs, get instant meanings, translations, explanations, and Wikipedia summaries.">
+    <title>Nexus Reader | Dashboard</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Core UI styles -->
+    <link rel="stylesheet" href="styles.css?v=4">
+</head>
+<body class="dark-theme dashboard-v2">
+
+    <!-- Animated Ambient Background -->
+    <div class="ambient-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="glass-app-container">
+        <!-- Floating Glass Sidebar -->
+        <aside class="glass-sidebar">
+            <div class="sidebar-top">
+                <div class="brand">
+                    <div class="logo-icon"><i class="fa-solid fa-layer-group"></i></div>
+                    <span class="logo-text">Nexus<span class="highlight">Reader</span></span>
+                </div>
+                
+                <nav class="sidebar-nav">
+                    <a href="#" class="sidebar-link active" data-view="view-dashboard">
+                        <i class="fa-solid fa-border-all"></i> <span class="nav-text">Dashboard</span>
+                    </a>
+                    <a href="#" class="sidebar-link" data-view="view-leaderboard">
+                        <i class="fa-solid fa-chart-simple"></i> <span class="nav-text">Leaderboard</span>
+                    </a>
+                    <a href="#" class="sidebar-link" data-view="view-feedback">
+                        <i class="fa-solid fa-heart-circle-check"></i> <span class="nav-text">Feedback</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="sidebar-bottom">
+                <!-- User profile & Logout -->
+                <div class="upgrade-card" id="user-profile-section" style="display: none; background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.15); margin-bottom: 16px; align-items: center; justify-content: space-between; padding: 12px 16px;">
+                    <div style="display: flex; align-items: center; gap: 10px; overflow: hidden; max-width: 80%;">
+                        <div class="upgrade-icon-bg" style="background: var(--accent-primary); width: 32px; height: 32px; border-radius: 50%; font-size: 13px; flex-shrink: 0;"><i class="fa-solid fa-user"></i></div>
+                        <div class="upgrade-info" style="overflow: hidden;">
+                            <h4 id="user-display-email" style="font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0; color: var(--text-primary);"></h4>
+                        </div>
+                    </div>
+                    <button class="icon-btn tooltip" data-tooltip="Logout" id="logout-btn" style="color: #ef4444; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 8px; flex-shrink: 0;"><i class="fa-solid fa-power-off"></i></button>
+                </div>
+                
+                <div class="theme-selector glass-theme-selector">
+                    <div class="theme-toggle-group">
+                        <button class="theme-btn" data-theme="light"><i class="fa-regular fa-sun"></i></button>
+                        <button class="theme-btn active" data-theme="system"><i class="fa-solid fa-desktop"></i></button>
+                        <button class="theme-btn" data-theme="dark"><i class="fa-solid fa-moon"></i></button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="glass-main">
+            <!-- VIEW: DASHBOARD -->
+            <div id="view-dashboard" class="dash-view">
+                <header class="hero-header">
+                    <div class="hero-text">
+                        <h1>Welcome back, <span class="highlight-gradient">Creator</span></h1>
+                        <p>Let's build something extraordinary today.</p>
+                    </div>
+                    <div class="hero-search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Search your workspace...">
+                        <div class="search-shortcut">⌘K</div>
+                    </div>
+                </header>
+
+                <div class="glass-section">
+                    <h2 class="section-title">Create New</h2>
+                    <div class="action-cards-grid">
+                        <a href="#" id="main-reader-upload-card" class="action-card glass-card">
+                            <div class="action-icon document-icon">
+                                <i class="fa-regular fa-file-lines"></i>
+                            </div>
+                            <div class="action-info">
+                                <h3>Document Reader</h3>
+                                <p>Upload PDF, DOC, PPT</p>
+                            </div>
+                            <i class="fa-solid fa-arrow-right action-arrow"></i>
+                        </a>
+
+                        <div class="action-card glass-card disabled-card tooltip" data-tooltip="Coming Soon">
+                            <div class="action-icon video-icon">
+                                <i class="fa-brands fa-youtube"></i>
+                            </div>
+                            <div class="action-info">
+                                <h3>YT Video</h3>
+                                <p>Analyze Youtube Links</p>
+                            </div>
+                            <i class="fa-solid fa-arrow-right action-arrow"></i>
+                        </div>
+
+                        <div class="action-card glass-card disabled-card tooltip" data-tooltip="Coming Soon">
+                            <div class="action-icon audio-icon">
+                                <i class="fa-solid fa-microphone"></i>
+                            </div>
+                            <div class="action-info">
+                                <h3>Audio Transcript</h3>
+                                <p>Upload or record audio</p>
+                            </div>
+                            <i class="fa-solid fa-arrow-right action-arrow"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-section my-notes-section">
+                    <div class="my-notes-header">
+                        <h2 class="section-title">My Workspace Documents</h2>
+                        <div class="my-notes-actions" style="display: flex; gap: 12px;">
+                            <button class="glass-btn" id="dash-upload-btn"><i class="fa-solid fa-file-arrow-up"></i> Upload File</button>
+                            <input type="file" id="dash-file-input" accept=".pdf,.txt,.docx,.png,.jpg,.jpeg" hidden>
+                        </div>
+                    </div>
+                    <div class="notes-list" id="recent-notes-list">
+                        <!-- User files from DB injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: LEADERBOARD -->
+            <div id="view-leaderboard" class="dash-view hidden">
+                <header class="hero-header">
+                    <div class="hero-text">
+                        <h1>Daily <span class="highlight-gradient">Streaks</span></h1>
+                        <p>Keep your learning streak alive and see how you rank.</p>
+                    </div>
+                </header>
+                
+                <div class="leaderboard-stats-grid">
+                    <div class="stat-card glass-card">
+                        <div class="stat-header">
+                            <div class="stat-icon-wrapper" style="color: #ef4444; background: rgba(239, 68, 68, 0.1);"><i class="fa-solid fa-fire"></i></div>
+                            <span>Learning Streak</span>
+                            <span class="stat-badge">Live</span>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">1 <span class="stat-unit">days</span></div>
+                            <div class="stat-note">Keeping the streak alive today</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card glass-card">
+                        <div class="stat-header">
+                            <div class="stat-icon-wrapper" style="color: #eab308; background: rgba(234, 179, 8, 0.1);"><i class="fa-solid fa-trophy"></i></div>
+                            <span>Personal Best</span>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">1 <span class="stat-unit">days</span></div>
+                            <div class="stat-note">6 days until the next badge</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card glass-card">
+                        <div class="stat-header">
+                            <div class="stat-icon-wrapper" style="color: #8b5cf6; background: rgba(139, 92, 246, 0.1);"><i class="fa-solid fa-ranking-star"></i></div>
+                            <span>Global Rank</span>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">#37594</div>
+                            <div class="stat-note">Upload today to climb the board</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-section top-streaks-section">
+                    <div class="top-streaks-header">
+                        <h2>Top Streaks</h2>
+                        <span class="stat-badge">Daily max</span>
+                    </div>
+                    <div class="leaderboard-list">
+                        <div class="lb-item">
+                            <div class="lb-rank">#1</div>
+                            <div class="lb-avatar" style="background-color: #8b5cf6;">M</div>
+                            <div class="lb-details">
+                                <h4>Mousumi Mohanty</h4>
+                                <p>Longest streak: 64d · Legendary Learner</p>
+                            </div>
+                            <div class="lb-score">2d</div>
+                        </div>
+                        <div class="lb-item">
+                            <div class="lb-rank">#2</div>
+                            <div class="lb-avatar" style="background-color: #3b82f6;">R</div>
+                            <div class="lb-details">
+                                <h4>Raedik Gupta</h4>
+                                <p>Longest streak: 49d · Legendary Learner</p>
+                            </div>
+                            <div class="lb-score">31d</div>
+                        </div>
+                        <div class="lb-item">
+                            <div class="lb-rank">#3</div>
+                            <div class="lb-avatar" style="background-color: #10b981;">A</div>
+                            <div class="lb-details">
+                                <h4>aashee</h4>
+                                <p>Longest streak: 44d · Legendary Learner</p>
+                            </div>
+                            <div class="lb-score">44d</div>
+                        </div>
+                        <div class="lb-item">
+                            <div class="lb-rank">#4</div>
+                            <div class="lb-avatar" style="background-color: #f59e0b;">P</div>
+                            <div class="lb-details">
+                                <h4>PRATHAM</h4>
+                                <p>Longest streak: 41d · Legendary Learner</p>
+                            </div>
+                            <div class="lb-score">41d</div>
+                        </div>
+                        <div class="lb-item">
+                            <div class="lb-rank">#5</div>
+                            <div class="lb-avatar" style="background-color: #ef4444;">U</div>
+                            <div class="lb-details">
+                                <h4>User 241819</h4>
+                                <p>Longest streak: 35d · Legendary Learner</p>
+                            </div>
+                            <div class="lb-score">35d</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: FEEDBACK -->
+            <div id="view-feedback" class="dash-view hidden">
+                <div class="feedback-container">
+                    <header class="hero-header" style="text-align: center; margin-bottom: 40px;">
+                        <h1 style="justify-content: center;">Share your <span class="highlight-gradient">Feedback</span></h1>
+                        <p>How can we improve your experience?</p>
+                    </header>
+
+                    <div class="feedback-form glass-card">
+                        <label>What would make Snaplearn better for you?</label>
+                        <textarea class="glass-textarea" placeholder="Type your brilliant ideas here..." rows="6"></textarea>
+                        <div class="char-count">0/2000 characters</div>
+
+                        <label style="margin-top: 32px; display: block;">Rate your overall experience</label>
+                        <div class="star-rating">
+                            <button><i class="fa-regular fa-star"></i></button>
+                            <button><i class="fa-regular fa-star"></i></button>
+                            <button><i class="fa-regular fa-star"></i></button>
+                            <button><i class="fa-regular fa-star"></i></button>
+                            <button><i class="fa-regular fa-star"></i></button>
+                        </div>
+
+                        <div class="feedback-actions">
+                            <button class="glass-btn">Cancel</button>
+                            <button class="primary-btn glow-btn">Submit Feedback <i class="fa-solid fa-paper-plane" style="margin-left: 8px;"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Authentication Modal (Glassmorphic) -->
+    <div id="auth-modal" class="modal hidden">
+        <div class="modal-content glass-card" style="max-width: 420px; width: 90vw; padding: 40px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.15); background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(20px); box-shadow: var(--shadow-lg); display: flex; flex-direction: column; align-items: stretch; gap: 0;">
+            <div class="modal-header" style="border-bottom: none; padding: 0; margin-bottom: 24px; display: flex; flex-direction: column; align-items: center; text-align: center; background: transparent;">
+                <div class="logo-icon" style="width: 48px; height: 48px; font-size: 22px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-layer-group"></i></div>
+                <h2 style="font-size: 24px; font-weight: 700; margin: 0; color: var(--text-primary);">Sign In to <span class="highlight-gradient">Nexus</span></h2>
+                <p style="font-size: 13px; color: var(--text-secondary); margin-top: 8px; font-weight: 400;" id="auth-subtitle">Enter your email to receive a secure login OTP.</p>
+            </div>
+            <div class="modal-body" style="padding: 0;">
+                <form id="auth-form">
+                    <!-- Step 1: Email Input -->
+                    <div id="auth-email-step" class="form-group" style="display: flex; flex-direction: column;">
+                        <label for="auth-email" style="font-weight: 600; font-size: 13px; margin-bottom: 8px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Email Address</label>
+                        <input type="email" id="auth-email" class="glass-textarea" style="padding: 12px 16px; border-radius: 12px; font-size: 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); width: 100%; outline: none;" placeholder="name@domain.com" required>
+                        <button type="submit" id="auth-send-otp-btn" class="primary-btn glow-btn" style="width: 100%; margin-top: 24px; padding: 14px; justify-content: center; font-size: 14px; border-radius: 12px; font-weight: 600;">Get Verification Code</button>
+                    </div>
+
+                    <!-- Step 2: OTP Input (Hidden initially) -->
+                    <div id="auth-otp-step" class="form-group" style="display: none; flex-direction: column;">
+                        <label for="auth-otp" style="font-weight: 600; font-size: 13px; margin-bottom: 8px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">6-Digit OTP Code</label>
+                        <input type="text" id="auth-otp" class="glass-textarea" style="padding: 12px 16px; border-radius: 12px; font-size: 20px; letter-spacing: 6px; text-align: center; font-weight: 700; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); width: 100%; outline: none;" placeholder="000000" maxlength="6">
+                        <div style="display: flex; gap: 12px; margin-top: 24px; width: 100%;">
+                            <button type="button" id="auth-back-btn" class="glass-btn" style="flex: 1; padding: 14px; justify-content: center; border-radius: 12px; font-size: 14px; font-weight: 600;">Back</button>
+                            <button type="submit" id="auth-verify-btn" class="primary-btn glow-btn" style="flex: 2; padding: 14px; justify-content: center; border-radius: 12px; font-size: 14px; font-weight: 600;">Verify & Login</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <div class="mobile-bottom-nav">
+        <a href="#" class="mobile-nav-item active" data-view="view-dashboard">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="mobile-nav-item" data-view="view-leaderboard">
+            <i class="fa-solid fa-chart-simple"></i>
+            <span>Leaderboard</span>
+        </a>
+        <a href="#" class="mobile-nav-item" data-view="view-feedback">
+            <i class="fa-solid fa-heart-circle-check"></i>
+            <span>Feedback</span>
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script src="config.js?v=3"></script>
+    <script src="storage.js?v=3"></script>
+    <script src="nexus-ui.js"></script>
+    <script src="dashboard.js?v=4"></script>
+</body>
+</html>

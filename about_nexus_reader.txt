@@ -1,0 +1,80 @@
+=========================================================
+            ABOUT NEXUS READER - COMPREHENSIVE GUIDE
+=========================================================
+
+1. WHAT IS NEXUS READER?
+---------------------------------------------------------
+Nexus Reader is an innovative "AI Smart Document Reader" designed to completely transform the way students, researchers, and professionals interact with digital documents. Rather than functioning as a passive PDF viewer, Nexus Reader is an active learning environment. It brings powerful artificial intelligence, translation services, encyclopedic knowledge, and audio-visual aids directly to the text you are reading, creating a seamless, distraction-free study space.
+
+2. THE PROBLEM STATEMENT
+---------------------------------------------------------
+In the modern digital learning environment, readers face several critical challenges:
+* Fragmented Workflows: When reading complex PDFs or academic papers, users frequently encounter unfamiliar words, foreign languages, or dense jargon. To resolve this, they must open new browser tabs to search Google, use Google Translate, or query ChatGPT.
+* Context Switching & Distraction: Constantly switching between a document and external tools disrupts focus, breaks the "flow" of reading, and severely reduces reading comprehension and speed.
+* Disconnected Note-Taking: Taking notes usually requires a separate application (like Word or Notepad), making it difficult to link specific notes back to the exact section of the document they reference.
+* Lack of Accessibility: Staring at screens for long periods causes eye strain, and traditional PDFs lack built-in text-to-speech features for auditory learners or those with visual impairments.
+
+3. THE SOLUTION
+---------------------------------------------------------
+Nexus Reader solves these problems by providing a unified, context-aware reading workspace:
+* Centralized Intelligence: By integrating a "Smart Selection" toolbar directly into the document viewer, Nexus Reader allows users to highlight text and instantly receive definitions, translations, Wikipedia summaries, and AI explanations without ever leaving the page.
+* Built-in Study Aids: It actively helps users digest information by generating engaging podcasts, flashcards, and quizzes from the source material.
+* Integrated Workspace: A split-screen design ensures that the reading material and the user's personal notes exist side-by-side in perfect harmony.
+
+4. DETAILED CORE FEATURES
+---------------------------------------------------------
+* Split-Screen Workspace: A highly customizable, draggable interface. You view your PDF document on the left, while your interactive AI knowledge panel and personal notes reside on the right. You can drag the center divider to adjust the focus.
+
+* Smart Selection Popup: The heart of Nexus Reader. Whenever you highlight a word or paragraph, a sleek floating toolbar appears instantly. It acts as your command center for interacting with the text.
+
+* AI Explanations (Google Gemini): Powered by state-of-the-art AI, this tool takes complex academic sentences or heavy jargon and rewrites them into simple, easy-to-understand explanations.
+
+* Dictionary & Wikipedia Integrations: Highlight a word to fetch live dictionary definitions (via the Free Dictionary API). Highlight a concept or name to pull a concise summary directly from Wikipedia's REST API.
+
+* Instant Multi-Language Translation: Utilizing Deep-Translator, users can instantly convert highlighted text into various global languages, removing language barriers from research.
+
+* Text-to-Speech (Listen): Designed for auditory learners. It uses your browser's native Web Speech API and premium Edge-TTS to smoothly read the highlighted text aloud.
+
+* Podcast Generation: A groundbreaking feature that takes your document's text and uses AI to generate an engaging, 2-speaker conversational podcast. One AI host acts as an inquisitive student, while the other acts as an expert, making dry material incredibly fun to listen to.
+
+* Smart Study Materials: Nexus Reader acts as a personal tutor by automatically generating study guides, flashcards, and multiple-choice questions (MCQs) based on the current text you are studying.
+
+* Rich-Text Notes Editor: A dedicated panel for active reading. Jot down thoughts, format them with bold/italics/lists, and save them. Notes are stored securely in your local database.
+
+* Beautiful Dark & Light Themes: Eye-friendly modes seamlessly toggled using modern CSS variables to reduce eye strain during late-night study sessions.
+
+5. HOW TO WORK WITH THE WEB APP
+---------------------------------------------------------
+Step 1: Upload a Document
+- Open the application in your web browser.
+- Click the file upload button on the dashboard.
+- Select a PDF file from your computer. The built-in PDF.js engine will render it natively and beautifully on the HTML5 Canvas.
+
+Step 2: Read and Highlight
+- Begin reading your document.
+- When you find a difficult concept, simply click and drag your mouse over the text. 
+- The Smart Selection Popup will elegantly fade in directly above your cursor.
+
+Step 3: Trigger Smart Actions
+- Click "Meaning" to open the Knowledge Panel with a dictionary definition.
+- Click "Translate" to convert the text. (You can change the target language in settings).
+- Click "Explain" to have the Gemini AI break down the concept.
+- Click "Wiki" to pull a quick summary from Wikipedia.
+- Click "Listen" to hear the text spoken aloud.
+- Click "Podcast" to generate an audio show about the highlighted topic.
+
+Step 4: Take Notes & Study
+- Use the draggable resizer in the middle of the screen to expand the right-hand panel.
+- Switch to the "Notes" tab to type out your thoughts in the Rich-Text editor.
+- Switch to the "Study" tab to generate and review flashcards.
+
+6. TECHNICAL DETAILS & ARCHITECTURE
+---------------------------------------------------------
+- Frontend Architecture: Built with pure Vanilla HTML5, CSS3, and ES6 JavaScript. By avoiding heavy frameworks like React or Angular, the application remains incredibly fast, lightweight, and easy to maintain. It uses PDF.js to parse and render PDFs.
+- Backend API: Powered by Python and the Flask micro-framework. The backend serves as the bridge between the frontend and the external AI/Data APIs, handling CORS and secure data routing.
+- Database: Uses SQLite for fast, lightweight local storage of user notes, uploaded files, and document metadata.
+- AI Integration: Uses the `google-genai` SDK to connect to Google's powerful Gemini models for explanations and study material generation.
+- Speech Synthesis: Integrates `edge-tts` (Microsoft Edge's Text-to-Speech API) for high-quality, lifelike voice generation in podcasts.
+- Developer: Sudharsan S
+
+=========================================================
