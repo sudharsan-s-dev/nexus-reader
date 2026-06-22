@@ -150,15 +150,30 @@ async function loadNotes(docHash) {
         if (res.ok) {
             const data = await res.json();
             const defaultNote = `
-                <div style="color: var(--text-secondary); padding: 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; margin-bottom: 16px; font-family: var(--font-body);">
+                <div style="color: var(--text-secondary); padding: 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; margin-bottom: 24px; font-family: var(--font-body);">
                     <h3 style="margin-top: 0; color: var(--text-primary); font-size: 15px; margin-bottom: 12px;"><i class="fa-solid fa-lightbulb" style="color: #eab308; margin-right: 8px;"></i>How to use Notes Effectively</h3>
                     <ul style="padding-left: 20px; line-height: 1.6; font-size: 13px; margin-bottom: 16px;">
                         <li><strong>Format text</strong> using the toolbar buttons above (Bold, Italic, Lists).</li>
                         <li><strong>Deep Links:</strong> Scroll to an important part of your PDF, then click <b><i class="fa-solid fa-link"></i> Add Anchor</b>. It inserts a clickable badge that brings you exactly back to that spot!</li>
                         <li><strong>Auto-save:</strong> Your notes are automatically and securely saved.</li>
                     </ul>
-                    <p style="font-size: 12px; font-style: italic; opacity: 0.7; margin-bottom: 0;">(Select and delete this box to start writing your own notes)</p>
-                </div><p><br></p>
+                    <p style="font-size: 12px; font-style: italic; opacity: 0.7; margin-bottom: 0;">(Select and delete this entire box to start writing your own notes)</p>
+                </div>
+                
+                <h2 style="color: var(--text-primary); font-size: 18px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; margin-bottom: 16px; margin-top: 0;">📚 Example: Cellular Biology</h2>
+                <p style="color: var(--text-secondary); line-height: 1.6; font-size: 14px; margin-bottom: 16px;"><strong>Topic:</strong> Cellular Respiration <br><strong>Date:</strong> October 12th</p>
+                
+                <h4 style="color: #818cf8; font-size: 15px; margin-top: 20px; margin-bottom: 10px;">Key Takeaways:</h4>
+                <ul style="color: var(--text-secondary); line-height: 1.7; font-size: 14px; padding-left: 20px;">
+                    <li><i>Mitochondria</i> is the powerhouse of the cell.</li>
+                    <li>The process generates <b>ATP</b> (energy) for cellular activities.</li>
+                    <li>This is the primary way living things extract energy from glucose.</li>
+                </ul>
+                
+                <div style="background: rgba(99, 102, 241, 0.1); border-left: 4px solid #6366f1; padding: 12px 16px; margin-top: 24px; border-radius: 0 8px 8px 0;">
+                    <p style="margin: 0; font-size: 13px; color: var(--text-primary);"><b>📝 Exam Prep:</b> Review the diagram of the Krebs Cycle.</p>
+                </div>
+                <p><br></p>
             `;
             editor.innerHTML = data.content || defaultNote;
             attachAnchorListeners();
