@@ -58,26 +58,26 @@ Knowledge Panel / Audio Playback
 
 ### 📖 SMART READING WORKSPACE
 
-| Feature | Description |
-| --- | --- |
-| 🌗 **Dark / Light Theme** | Beautifully designed modes utilizing CSS variables for seamless toggling. |
-| 🪟 **Split-Screen Layout** | Adjust document vs. notes width using a draggable resizer. |
-| 📄 **PDF Engine** | Integrates Mozilla's PDF.js to render documents natively on HTML5 Canvas. |
-| 📝 **Rich-Text Notes** | Dedicated notes panel allowing basic formatting and anchor links. |
+| Feature                    | Description                                                               |
+| -------------------------- | ------------------------------------------------------------------------- |
+| 🌗 **Dark / Light Theme**  | Beautifully designed modes utilizing CSS variables for seamless toggling. |
+| 🪟 **Split-Screen Layout** | Adjust document vs. notes width using a draggable resizer.                |
+| 📄 **PDF Engine**          | Integrates Mozilla's PDF.js to render documents natively on HTML5 Canvas. |
+| 📝 **Rich-Text Notes**     | Dedicated notes panel allowing basic formatting and anchor links.         |
 
 ---
 
 ### 🧠 AI & CONTEXTUAL TOOLS
 
-| Feature | Description |
-| --- | --- |
-| ✨ **Smart Selection** | Highlighting text triggers a floating toolbar with smart actions. |
-| 🌍 **Translate** | Translates text into various languages instantly. |
-| 📚 **Dictionary & Wiki** | Fetches live definitions and Wikipedia summaries for keywords. |
-| 🤖 **AI Explanations** | Uses Google Gemini to simplify and explain complex text. |
-| 🎧 **Text-to-Speech** | Uses native Web Speech API and Edge-TTS to read text aloud smoothly. |
-| 🎙 **Podcast Generation** | Converts document text into an engaging 2-speaker podcast. |
-| 🎓 **Study Materials** | Automatically generates flashcards, MCQs, and summaries. |
+| Feature                    | Description                                                               |
+| -------------------------- | ------------------------------------------------------------------------- |
+| ✨ **Smart Selection**     | Highlighting text triggers a floating toolbar with smart actions.         |
+| 🌍 **Translate**           | Translates text into various languages instantly.                         |
+| 📚 **Dictionary & Wiki**   | Fetches live definitions and Wikipedia summaries for keywords.            |
+| 🤖 **AI Explanations**     | Uses Google Gemini to simplify and explain complex text.                  |
+| 🎧 **Text-to-Speech**      | Uses native Web Speech API and Edge-TTS to read text aloud smoothly.      |
+| 🎙 **Podcast Generation**  | Converts document text into an engaging 2-speaker podcast.                |
+| 🎓 **Study Materials**     | Automatically generates flashcards, MCQs, and summaries.                  |
 
 ---
 
