@@ -1,10 +1,11 @@
 from flask import Blueprint, request, jsonify
 import sqlite3
 import json
+import os
 from services.study_service import generate_study_material
 
 study_bp = Blueprint('study_bp', __name__)
-DB_PATH = 'nexus_reader.db'
+DB_PATH = os.environ.get('DB_PATH', os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'storage', 'nexus_reader.db')))
 
 def get_db_connection():
     conn = sqlite3.connect(DB_PATH)
@@ -14,7 +15,7 @@ def get_db_connection():
 @study_bp.route('/api/study/generate', methods=['POST'])
 def generate_study():
     data = request.json
-    api_key = data.get('api_key')
+    api_key = data.get('api_key') or os.environ.get('GEMINI_API_KEY')
     text = data.get('text')
     document_id = data.get('document_id')
     material_type = data.get('type')

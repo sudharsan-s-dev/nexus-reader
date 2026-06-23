@@ -8,8 +8,10 @@ import uuid
 from functools import wraps
 from itsdangerous import URLSafeSerializer
 
+import os
+
 auth_bp = Blueprint('auth', __name__)
-DB_PATH = 'nexus_reader.db'
+DB_PATH = os.environ.get('DB_PATH', os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'storage', 'nexus_reader.db')))
 SECRET_KEY = 'nexus-secret-key-super-secure-token-signing'
 serializer = URLSafeSerializer(SECRET_KEY, salt='auth-session')
 

@@ -37,7 +37,23 @@ def _cache_set(key, value):
 app = Flask(__name__, static_folder='../frontend', static_url_path='/')
 # Enable CORS so the vanilla HTML frontend can make requests with credentials
 CORS(app, resources={r"/api/*": {"origins": ["http://localhost:8000", "http://127.0.0.1:8000", "http://localhost:5000", "http://127.0.0.1:5000"]}}, supports_credentials=True)
-DB_PATH = 'nexus_reader.db'
+
+import logging
+# Set up logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s [%(levelname)s] %(name)s: %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+# Ensure storage directories exist automatically on startup
+STORAGE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), 'storage'))
+UPLOADS_DIR = os.path.join(STORAGE_DIR, 'uploads')
+os.makedirs(UPLOADS_DIR, exist_ok=True)
+logger.info(f"Ensuring storage directories exist at {STORAGE_DIR} and {UPLOADS_DIR}")
+
+DB_PATH = os.environ.get('DB_PATH', os.path.join(STORAGE_DIR, 'nexus_reader.db'))
+logger.info(f"Using SQLite database path: {DB_PATH}")
 def init_db():
     with sqlite3.connect(DB_PATH) as conn:
         cursor = conn.cursor()
@@ -137,6 +153,10 @@ app.register_blueprint(ocr_bp)
 app.register_blueprint(study_bp)
 app.register_blueprint(auth_bp)
 app.register_blueprint(file_bp)
+@app.route('/health')
+def health_check():
+    return jsonify({'status': 'healthy', 'timestamp': time.time()}), 200
+
 @app.route('/')
 def serve_frontend():
     return app.send_static_file('index.html')
@@ -299,7 +319,7 @@ from services.podcast_service import generate_podcast_audio
 @app.route('/api/generate_podcast', methods=['POST'])
 def generate_podcast_route():
     data = request.json
-    api_key = data.get('api_key')
+    api_key = data.get('api_key') or os.environ.get('GEMINI_API_KEY')
     text = data.get('text')
     language = data.get('language', 'English')
     

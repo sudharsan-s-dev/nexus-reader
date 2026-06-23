@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 from routes.auth_routes import login_required
 
 file_bp = Blueprint('files', __name__)
-DB_PATH = 'nexus_reader.db'
+DB_PATH = os.environ.get('DB_PATH', os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'storage', 'nexus_reader.db')))
 UPLOAD_BASE_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'storage', 'uploads')
 
 MAX_FILE_LIMIT = 10
